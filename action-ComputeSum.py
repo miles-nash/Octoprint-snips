@@ -8,7 +8,6 @@ import sys
 import ConfigParser
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
-import wikipedia as wiki
 
 CONFIGURATION_ENCODING_FORMAT = "utf-8"
 CONFIG_INI = "config.ini"
@@ -42,26 +41,10 @@ def action_wrapper(hermes, intentMessage, conf):
     :param conf:
     :return:
     """
-    if len(intentMessage.slots.
-    
-    ) > 0:
-        article = intentMessage.slots.article_indicator.first().value
-        wiki.set_lang('de')
-        try:
-            results = wiki.search(article, 5)
-            lines = 2
-            summary = wiki.summary(results[0], lines)
-            if "==" in summary or len(summary) > 250:
-                # We hit the end of the article summary or hit a really long
-                # one.  Reduce to first line.
-                lines = 1
-                summary = wiki.summary(results[0], lines)
-
-            summary = re.sub(r'\([^)]*\)|/[^/]*/', '', summary).encode('utf8')
-            hermes.publish_end_session(intentMessage.session_id, summary)
-        except:
-            print "Unexpected error:", sys.exc_info()[0]
-            hermes.publish_end_session(intentMessage.session_id, "An error occured")
+    if len(intentMessage.slots.number) > 0:
+        number = intentMessage.slots.number.first().value
+       
+        hermes.publish_end_session(intentMessage.session_id, "number")
     else:
         hermes.publish_end_session(intentMessage.session_id, "An error occured")
 
