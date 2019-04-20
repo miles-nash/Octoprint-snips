@@ -1,12 +1,12 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
-import re
+#import re
 import io
-import sys
+#import sys
 
 import ConfigParser
-from hermes_python.hermes import Hermes
+from hermes_python.hermes import Hermes, MqttOptions
 from hermes_python.ontology import *
 
 CONFIGURATION_ENCODING_FORMAT = "utf-8"
@@ -41,11 +41,10 @@ def action_wrapper(hermes, intentMessage, conf):
     :param conf:
     :return:
     """
-    if len(intentMessage.slots.number) > 0:
-        number = intentMessage.slots.number.first().value
-       
-        hermes.publish_end_session(intentMessage.session_id, "number")
-    else:
+    #if len(intentMessage.slots.number) > 0:
+     #   number = intentMessage.slots.number.first().value
+    #    hermes.publish_end_session(intentMessage.session_id, "number")
+   # else:
         hermes.publish_end_session(intentMessage.session_id, "An error occured")
 
 
