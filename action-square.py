@@ -35,7 +35,6 @@ def subscribe_intent_callback(hermes, intentMessage):
 
 def action_wrapper(hermes, intentMessage, conf):
     """
-
     :param hermes:
     :param intentMessage:
     :param conf:
